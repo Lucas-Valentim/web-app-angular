@@ -1,1 +1,72 @@
-<p>cadastro works!</p>
+<section class="container">
+  <div class="row">
+    <h1 class="col-sm-12">Cadastro</h1>
+  </div>
+  <form class="row">
+    <div class="col-md-4">
+      <label for="cmbMarcas" class="form-label">Marca</label>
+      <select class="form-select" name="cmbMarcas" id="cmbMarcas">
+        <option selected value={0}>Selecione</option>
+        <option value={1}>Teste 1</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="cmbAno" class="form-label">Ano</label>
+      <select class="form-select" name="cmbAno" id="cmbAno">
+        <option selected value={0}>Selecione</option>
+        <option value={1}>Teste 1</option>
+      </select>
+    </div>
+    <div class="col-md-4">
+      <label for="cmbModelos" class="form-label">Modelo</label>
+      <select class="form-select" name="cmbModelos" id="cmbModelos" defaultValue="Selecione">
+        <option value={0}>Selecione</option>
+        <option value={1}>Teste 1</option>)
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="txtRenavam" class="form-label">Renavam</label>
+      <input type="text" class="form-control" id="txtRenavam">
+    </div>
+    <div class="col-md-4">
+      <label for="cmbCor" class="form-label">Cor</label>
+      <select class="form-select" name="cmbCor" id="cmbCor">
+        <option selected value={0}>Selecione</option>
+        <option value={1}>Teste 1</option>
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="txtKilometragem" class="form-label">Kilometragem</label>
+      <input type="number" class="form-control" id="txtKilometragem">
+    </div>
+
+    <div class="col-md-4">
+      <label for="txtPlaca" class="form-label">Placa</label>
+      <input type="text" class="form-control" id="txtPlaca">
+    </div>
+
+    <div class="col-md-4 mb-5">
+      <label for="cmbFilial" class="form-label">Filial</label>
+      <select class="form-select" name="cmbFilial" id="cmbFilial" defaultValue="Selecione">
+        <option value={0}>Selecione</option>
+        <option value={1}>Teste 1</option>)
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <label for="txtValor" class="form-label">Valor</label>
+      <input type="text" class="form-control" id="txtValor">
+    </div>
+
+    <div class="row">
+      <div class="d-flex justify-content-center mb-5">
+        <button type="button" class="btn btn-outline-danger">Limpar</button>
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+      </div>
+    </div>
+  </form>
+
+
+</section>
