@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ErrorHandler } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEvent} from '@angular/common/http';
 import { Marca } from 'src/app//models/marca';
-import { Observable } from 'rxjs';
+import { EmptyError, Observable } from 'rxjs';
 import { Modelo } from '../models/modelo';
 import { Cor } from '../models/cor';
 import { Filial } from '../models/filial';
@@ -9,7 +9,7 @@ import { Veiculo } from '../models/veiculo';
 import { VeiculoConsulta } from '../models/veiculo-consulta';
 import { Estoque } from '../models/estoque';
 import { error } from '@angular/compiler/src/util';
-
+import { catchError } from 'rxjs';
 
 
 @Injectable({
@@ -24,7 +24,11 @@ export class VeiculoService {
 
     // Headers
     httpOptions = {
-      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+      headers: new HttpHeaders({ 
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Method': 'PUT, POST, GET, OPTIONS'
+      })
     }
 
   getMarcas(): Observable<Marca[]>{
@@ -46,18 +50,31 @@ export class VeiculoService {
   }
 
   //cadastramento veiculo
-  postVeiculo(veiculo: Veiculo){
+  postVeiculo(veiculo: Veiculo, estoque: Estoque){
   
     this.http.post<Veiculo>(this.urlBase + "/cadastro", veiculo )
-              .subscribe(resultado => { console.log("Cadastro Realizado - " + resultado)}
+              .pipe(
+                catchError(error => {
+                  alert("Erro ao Cadastrar Veiculo");
+                  return error;
+                })
+              )
+              .subscribe(resultado => { 
+                alert("Cadastro Realizado")
+                this.putEstoque(estoque).subscribe()}
               );
-
   }
 
-  postEstoque(estoque: Estoque): Observable<Estoque>{
+  putEstoque(estoque: Estoque): Observable<unknown>{
 
 //controle estoque via RabbitMQ
-    return this.http.put<Estoque>(this.urlEstoque, estoque);
+    return this.http.put<Estoque>(this.urlEstoque, estoque, this.httpOptions)   
+    .pipe(
+      catchError(error => {
+        alert("Erro ao Atualizar o Estoque");
+        return error;
+      })
+    );
   }
   
   getVeiculoPorMarca(codMarca: Number): Observable<VeiculoConsulta[]>{

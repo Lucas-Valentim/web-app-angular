@@ -105,8 +105,8 @@ export class CadastroComponent implements OnInit {
     this.estoque.codmodelo = this.codModelo;
     this.estoque.qtdemodelo = 1;
 
-    this.veiculoService.postVeiculo(this.veiculo);
-    this.veiculoService.postEstoque(this.estoque).subscribe();
+    this.veiculoService.postVeiculo(this.veiculo, this.estoque);
+    //this.veiculoService.putEstoque(this.estoque).subscribe();
 
   
 
