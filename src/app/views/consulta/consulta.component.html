@@ -5,46 +5,46 @@
   <form class="row">
     <div class="col-md-4">
       <label for="cmbMarcas" class="form-label">Marca</label>
-      <select class="form-select" name="cmbMarcas" id="cmbMarcas">
+      <select class="form-select" name="cmbMarcas" [(ngModel)]="codMarca" type="Number" (change)="listaModelos()" id="cmbMarcas" defaultValue="Selecione">
         <option selected value={0}>Selecione</option>
-        <option value={1}>Teste 1</option>
+        <option *ngFor="let marca of marcas" [value]="marca.codMarca">{{marca.marca}}</option>
       </select>
     </div>
     <div class="col-md-4">
       <label for="cmbAno" class="form-label">Ano</label>
       <select class="form-select" name="cmbAno" id="cmbAno">
         <option selected value={0}>Selecione</option>
-        <option value={1}>Teste 1</option>
+        <option *ngFor="let modelo of modelos" [value]="modelo.codModelo">{{modelo.ano}}</option>
       </select>
     </div>
     <div class="col-md-4">
       <label for="cmbCor" class="form-label">Cor</label>
-      <select class="form-select" name="cmbCor" id="cmbCor">
+      <select class="form-select" name="cmbCor" id="cmbCor" [(ngModel)]="codCor" type="Number">
         <option selected value={0}>Selecione</option>
-        <option value={1}>Teste 1</option>
+        <option *ngFor="let cor of cores" [value]="cor.codCor">{{cor.cor}}</option>
       </select>
     </div>
 
     <div class="col-md-4">
       <label for="cmbModelos" class="form-label">Modelo</label>
-      <select class="form-select" name="cmbModelos" id="cmbModelos" defaultValue="Selecione">
+      <select class="form-select" name="cmbModelos" [(ngModel)]="codModelo" type="Number" id="cmbModelos" defaultValue="Selecione">
         <option value={0}>Selecione</option>
-        <option value={1}>Teste 1</option>)
+        <option *ngFor="let modelo of modelos" [value]="modelo.codModelo">{{modelo.modelo}}</option>
       </select>
     </div>
 
     <div class="col-md-4 mb-5">
       <label for="cmbFilial" class="form-label">Filial</label>
-      <select class="form-select" name="cmbFilial" id="cmbFilial" defaultValue="Selecione">
+      <select class="form-select" name="codFilial" [(ngModel)]="codFilial" type="Number" id="cmbFilial" defaultValue="Selecione">
         <option value={0}>Selecione</option>
-        <option value={1}>Teste 1</option>)
+        <option *ngFor="let filial of filiais" [value]="filial.codFilial">{{filial.razaoSocial + " - " + filial.cnpj}}</option>
       </select>
     </div>
 
     <div class="row">
       <div class="d-flex justify-content-center mb-5">
         <button type="button" class="btn btn-outline-danger">Limpar</button>
-        <button type="submit" class="btn btn-primary">Filtrar</button>
+        <button type="submit" class="btn btn-primary" (click)="consultarVeiculo()">Consultar</button>
       </div>
     </div>
   </form>
@@ -63,7 +63,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>key.codModelo.codMarca.marca</td>
+          <td>key.codMarca.marca</td>
           <td>key.codModelo.modelo</td>
           <td>key.codModelo.ano</td>
           <td>key.codFilial.razaoSocial</td>
