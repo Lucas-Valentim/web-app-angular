@@ -5,7 +5,8 @@
   <form class="row">
     <div class="col-md-4">
       <label for="cmbMarcas" class="form-label">Marca</label>
-      <select class="form-select" name="cmbMarcas" id="cmbMarcas" [(ngModel)]="codMarca" type="Number" (change)="listaModelos()">
+      <select class="form-select" name="cmbMarcas" id="cmbMarcas" [(ngModel)]="codMarca" type="Number"
+        (change)="listaModelos()">
         <option selected value={0}>Selecione</option>
         <option *ngFor="let marca of marcas" [value]="marca.codMarca">{{marca.marca}}</option>
       </select>
@@ -13,13 +14,36 @@
     <div class="col-md-4">
       <label for="cmbAno" class="form-label">Ano</label>
       <select class="form-select" name="cmbAno" id="cmbAno">
-        <option selected value={0}>Selecione</option>
-        <option *ngFor="let modelo of modelos" [value]="modelo.codModelo">{{modelo.ano}}</option>
+        <option selected value=0>Selecione</option>
+        <option value=2000>2000</option>
+        <option value=2001>2001</option>
+        <option value=2002>2002</option>
+        <option value=2003>2003</option>
+        <option value=2004>2004</option>
+        <option value=2005>2005</option>
+        <option value=2006>2006</option>
+        <option value=2007>2007</option>
+        <option value=2008>2008</option>
+        <option value=2009>2009</option>
+        <option value=2010>2010</option>
+        <option value=2011>2011</option>
+        <option value=2012>2012</option>
+        <option value=2013>2013</option>
+        <option value=2014>2014</option>
+        <option value=2015>2015</option>
+        <option value=2016>2016</option>
+        <option value=2017>2017</option>
+        <option value=2018>2018</option>
+        <option value=2019>2019</option>
+        <option value=2020>2020</option>
+        <option value=2021>2021</option>
+        <option value=2022>2022</option>
       </select>
     </div>
     <div class="col-md-4">
       <label for="cmbModelos" class="form-label">Modelo</label>
-      <select class="form-select" name="cmbModelos" [(ngModel)]="codModelo" type="Number" id="cmbModelos" defaultValue="Selecione">
+      <select class="form-select" name="cmbModelos" [(ngModel)]="codModelo" type="Number" id="cmbModelos"
+        defaultValue="Selecione">
         <option value={0}>Selecione</option>
         <option *ngFor="let modelo of modelos" [value]="modelo.codModelo">{{modelo.modelo}}</option>
       </select>
@@ -49,9 +73,11 @@
 
     <div class="col-md-4 mb-5">
       <label for="cmbFilial" class="form-label">Filial</label>
-      <select class="form-select" name="cmbFilial" [(ngModel)]="codFilial" type="Number" id="cmbFilial" defaultValue="Selecione">
+      <select class="form-select" name="cmbFilial" [(ngModel)]="codFilial" type="Number" id="cmbFilial"
+        defaultValue="Selecione">
         <option value={0}>Selecione</option>
-        <option *ngFor="let filial of filiais" [value]="filial.codFilial">{{filial.razaoSocial + " - " + filial.cnpj}}</option>
+        <option *ngFor="let filial of filiais" [value]="filial.codFilial">{{filial.razaoSocial + " - " + filial.cnpj}}
+        </option>
       </select>
     </div>
 
@@ -62,8 +88,8 @@
 
     <div class="row">
       <div class="d-flex justify-content-center mb-5">
-        <button type="button" class="btn btn-outline-danger">Limpar</button>
-        <button type="submit" class="btn btn-primary" (click)="cadastrarVeiculo()">Cadastrar</button>
+        <button type="button" class="btn btn-outline-danger mx-2" (click)="ClearForm()">Limpar</button>
+        <button type="submit" class="btn btn-primary mx-2" (click)="cadastrarVeiculo()">Cadastrar</button>
       </div>
     </div>
   </form>

@@ -17,8 +17,8 @@ import { catchError } from 'rxjs';
 })
 export class VeiculoService {
 
-  readonly urlBase = 'http://localhost:8089/veiculos';
-  readonly urlEstoque = 'http://localhost:8090/estoque';
+  readonly urlBase = 'http://3.137.162.197:8089/veiculos';
+  readonly urlEstoque = 'http://3.144.46.78:8090/estoque';
 
   constructor(private http: HttpClient) { }
 

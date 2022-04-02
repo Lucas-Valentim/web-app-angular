@@ -106,9 +106,10 @@ export class CadastroComponent implements OnInit {
     this.estoque.qtdemodelo = 1;
 
     this.veiculoService.postVeiculo(this.veiculo, this.estoque);
- 
+  }
 
-
+  ClearForm() {
+    location.reload();
   }
 
 }

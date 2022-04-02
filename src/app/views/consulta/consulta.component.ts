@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { VeiculoService } from 'src/app/services/veiculo.service';
 import { Marca } from 'src/app//models/marca';
 import { Modelo } from 'src/app//models/modelo';
@@ -15,6 +16,8 @@ import { VeiculoConsulta } from 'src/app/models/veiculo-consulta';
   encapsulation: ViewEncapsulation.None
 })
 export class ConsultaComponent implements OnInit {
+
+  validationError: any;
 
   codMarca: Number;
   marca = {} as Marca;
@@ -39,6 +42,7 @@ export class ConsultaComponent implements OnInit {
   km: Number;
   placa: string;
   valor: number;
+  ano: number;
 
 
   constructor(private veiculoService: VeiculoService) {
@@ -50,6 +54,7 @@ export class ConsultaComponent implements OnInit {
     this.placa = "";
     this.valor = 0.00;
     this.codModelo = 0;
+    this.ano = 0;
    }
 
   ngOnInit(): void {
@@ -89,34 +94,44 @@ export class ConsultaComponent implements OnInit {
     });
   }
 
-  consultarVeiculo(){
+  consultarVeiculo() {
+    
+    if (this.codMarca == 0) {
+      this.validationError = "Campo Obrigatório";
+      return;
+    }
+    else {
+      this.validationError = null;
+    }
 
    // window.alert("Entrou no CadastrarVeiculo");
-
-   if (this.codMarca != 0 && this.codModelo != 0 && this.codCor != 0){
     
-    this.veiculoService.getVeiculoPorCor(this.codCor).subscribe((veiculos: VeiculoConsulta[]) => {
-      this.veiculos = veiculos;
-    });
-
-   };
-   
-   if (this.codMarca != 0 && this.codModelo == 0 && this.codCor == 0){
-
     this.veiculoService.getVeiculoPorMarca(this.codMarca).subscribe((veiculos: VeiculoConsulta[]) => {
       this.veiculos = veiculos;
+      if (this.veiculos != null) {
+
+        if (this.codCor != 0) {
+          this.veiculos = this.veiculos?.filter(veic => veic.codCor.codCor == this.codCor);
+        }
+
+        if (this.codModelo != 0) {
+          this.veiculos = this.veiculos?.filter(veic => veic.codModelo.codModelo == this.codModelo);
+        }
+
+        if (this.codFilial != 0) {
+          this.veiculos = this.veiculos?.filter(veic => veic.codFilial.codFilial == this.codFilial);
+        }
+
+        if (this.ano != 0) {
+          this.veiculos = this.veiculos?.filter(veic => veic.codModelo.ano == this.ano);
+        }
+
+      }
     });
-
-   };
-
-   if (this.codMarca != 0 && this.codModelo != 0 && this.codCor == 0){
-
-    this.veiculoService.getVeiculoPorModelo(this.codModelo).subscribe((veiculos: VeiculoConsulta[]) => {
-      this.veiculos = veiculos;
-    });
-
-   }   
-
   };
+
+  ClearForm() {
+    location.reload();
+  }
 
 }
