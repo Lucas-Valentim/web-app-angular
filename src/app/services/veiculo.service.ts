@@ -60,7 +60,7 @@ export class VeiculoService {
                 })
               )
               .subscribe(resultado => { 
-                alert("Cadastro Realizado")
+                alert("Cadastro Realizado com sucesso!")
                 this.putEstoque(estoque).subscribe()}
               );
   }
