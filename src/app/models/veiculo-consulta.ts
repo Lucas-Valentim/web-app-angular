@@ -11,5 +11,5 @@ export interface VeiculoConsulta {
     codFilial: Filial;
     descricao: string;
     renavam: Number;
-    valor: Number;
+    valor: number;
 }

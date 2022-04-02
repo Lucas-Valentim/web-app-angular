@@ -60,24 +60,16 @@
           <th>Cor</th>
           <th>Valor</th>
         </tr>
-      </thead>
+      </thead>      
       <tbody>
-        <tr>
-          <td>key.codMarca.marca</td>
-          <td>key.codModelo.modelo</td>
-          <td>key.codModelo.ano</td>
-          <td>key.codFilial.razaoSocial</td>
-          <td>key.codCor.cor</td>
-          <td>key.valor</td>
-        </tr>
-        <tr>
-          <td>key.codModelo.codMarca.marca</td>
-          <td>key.codModelo.modelo</td>
-          <td>key.codModelo.ano</td>
-          <td>key.codFilial.razaoSocial</td>
-          <td>key.codCor.cor</td>
-          <td>key.valor</td>
-        </tr>
+          <tr *ngFor="let veiculo of veiculos">
+            <td>{{veiculo.codModelo.codMarca.marca}}</td>
+            <td>{{veiculo.codModelo.modelo}}</td>
+            <td>{{veiculo.codModelo.ano}}</td>
+            <td>{{veiculo.codFilial.razaoSocial}}</td>
+            <td>{{veiculo.codCor.cor}}</td>
+            <td>{{veiculo.valor | currency:'BRL':true:'1.2-2'}}</td>
+          </tr>
       </tbody>
     </table>
   </div>

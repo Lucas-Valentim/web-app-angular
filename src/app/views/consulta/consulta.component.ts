@@ -38,7 +38,7 @@ export class ConsultaComponent implements OnInit {
   renavam: Number;
   km: Number;
   placa: string;
-  valor: Number;
+  valor: number;
 
 
   constructor(private veiculoService: VeiculoService) {

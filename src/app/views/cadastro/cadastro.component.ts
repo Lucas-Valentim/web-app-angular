@@ -7,6 +7,7 @@ import { NumberValueAccessor } from '@angular/forms';
 import { Filial } from 'src/app/models/filial';
 import { CurrencyPipe } from '@angular/common';
 import { Veiculo } from 'src/app/models/veiculo';
+import { Estoque } from 'src/app/models/estoque';
 
 @Component({
   selector: 'app-cadastro',
@@ -32,6 +33,8 @@ export class CadastroComponent implements OnInit {
   filiais: Filial[] | undefined;
 
   veiculo = {} as Veiculo;
+
+  estoque = {} as Estoque;
 
   renavam: Number;
   km: Number;
@@ -99,7 +102,15 @@ export class CadastroComponent implements OnInit {
     this.veiculo.renavam = this.renavam;
     this.veiculo.valor = this.valor;
 
+    this.estoque.codmodelo = this.codModelo;
+    this.estoque.qtdemodelo = 1;
+
     this.veiculoService.postVeiculo(this.veiculo);
+    this.veiculoService.postEstoque(this.estoque).subscribe();
+
+  
+
+
   }
 
 }

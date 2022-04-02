@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEvent} from '@angular/common/http';
 import { Marca } from 'src/app//models/marca';
 import { Observable } from 'rxjs';
 import { Modelo } from '../models/modelo';
@@ -7,6 +7,8 @@ import { Cor } from '../models/cor';
 import { Filial } from '../models/filial';
 import { Veiculo } from '../models/veiculo';
 import { VeiculoConsulta } from '../models/veiculo-consulta';
+import { Estoque } from '../models/estoque';
+import { error } from '@angular/compiler/src/util';
 
 
 
@@ -15,7 +17,8 @@ import { VeiculoConsulta } from '../models/veiculo-consulta';
 })
 export class VeiculoService {
 
-  urlBase = 'http://localhost:8089/veiculos';
+  readonly urlBase = 'http://localhost:8089/veiculos';
+  readonly urlEstoque = 'http://localhost:8090/estoque';
 
   constructor(private http: HttpClient) { }
 
@@ -42,13 +45,21 @@ export class VeiculoService {
     return this.http.get<Filial[]>(this.urlBase + "/listarfiliais");
   }
 
-  //codMarca: Number, codModelo: Number, renavam: Number, codCor: Number, km: Number, placa: string, codFilial: Number, valor: Number
+  //cadastramento veiculo
   postVeiculo(veiculo: Veiculo){
+  
+    this.http.post<Veiculo>(this.urlBase + "/cadastro", veiculo )
+              .subscribe(resultado => { console.log("Cadastro Realizado - " + resultado)}
+              );
 
-    return this.http.post<Veiculo>(this.urlBase + "/cadastro", veiculo )
-              .subscribe(resultado => { console.log(resultado)});
   }
 
+  postEstoque(estoque: Estoque): Observable<Estoque>{
+
+//controle estoque via RabbitMQ
+    return this.http.put<Estoque>(this.urlEstoque, estoque);
+  }
+  
   getVeiculoPorMarca(codMarca: Number): Observable<VeiculoConsulta[]>{
     return this.http.get<VeiculoConsulta[]>(this.urlBase + "/consultapormarca/" + codMarca);
   }
